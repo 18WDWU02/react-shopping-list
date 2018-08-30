@@ -24,17 +24,19 @@ class App extends Component {
                 }
 
             ],
-            text: 'Hello World'
+            text: 'Hello World',
+            jumboClass: 'jumbotron text-center',
+            darkTheme: false
         }
-
         this.changeText = this.changeText.bind(this);
+        this.addNewItemtoList = this.addNewItemtoList.bind(this);
     }
 
 
     render(){
         return (
             <div className="App">
-              <div className="jumbotron text-center">
+              <div className={this.state.jumboClass}>
                 <h1 className="display-4">Shopping List</h1>
                 <h3>{this.state.text}</h3>
                 {/* Calling the ShoppingList component at the bottom of the page */}
@@ -43,7 +45,7 @@ class App extends Component {
                 <hr/>
 
                 {/* Calling the Form component which is in ./form.js */}
-                <Form/>
+                <Form addNew={this.addNewItemtoList}/>
                 <button onClick={this.changeText} >Change State of H3</button>
               </div>
             </div>
@@ -53,7 +55,28 @@ class App extends Component {
     changeText(e){
         e.preventDefault();
         // alert('H3 will be changed');
-        this.setState({text: 'Button has been clicked'});
+        this.setState({
+            text: 'Button has been clicked',
+            darkTheme: !this.state.darkTheme
+        });
+
+        if(this.state.darkTheme === false){
+            this.setState({
+                jumboClass: 'jumbotron text-center jumboDark'
+            });
+        } else {
+            this.setState({
+                jumboClass: 'jumbotron text-center'
+            });
+        }
+    }
+
+    addNewItemtoList(item){
+        var newItem = {
+            id: this.state.list.length + 1,
+            item: item
+        }
+        this.setState({list: this.state.list.concat(newItem)});
     }
 
 
