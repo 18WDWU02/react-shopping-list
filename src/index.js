@@ -4,12 +4,6 @@ import './index.css';
 // importing the component from ./from.js
 import Form from './form';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faStroopwafel)
-
 class App extends Component {
 
     constructor(props){
@@ -52,7 +46,7 @@ class App extends Component {
 
                 {/* Calling the Form component which is in ./form.js */}
                 <Form addNew={this.addNewItemtoList}/>
-                <button onClick={this.changeText} >Change State of H3</button>
+                <button onClick={this.changeText} >Change theme of form</button>
               </div>
             </div>
         )
@@ -99,16 +93,20 @@ class ShoppingList extends Component{
                 <ul className="list-group">
                     {
                         this.props.list.map(product => {
-                            return <li key={product.id} product={product} className="list-group-item">{product.item}</li>
+                            return <li key={product.id} product={product} className="list-group-item">{product.item}   <span className="controls"><span className="edit" onClick={this.edit}>Edit</span> - <span className="delete" onClick={this.delete}>Delete</span></span></li>
                         })
                     }
-
-
-
-
                 </ul>
             </div>
         )
+    }
+
+    edit(){
+        console.log("editing");
+    }
+
+    delete(){
+        console.log("deleteing");
     }
 }
 

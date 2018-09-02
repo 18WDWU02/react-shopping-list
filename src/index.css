@@ -14,3 +14,7 @@ body{
 .jumboDark ul li{
     color: #2c3e50;
 }
+
+.controls{
+    float: right;
+}
